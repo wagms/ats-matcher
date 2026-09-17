@@ -158,6 +158,8 @@ function Index() {
     setResume(SAMPLES[key].resume);
     setJob(SAMPLES[key].job);
     setSubmitted(true);
+    setGenerated(false);
+
   };
 
   return (
