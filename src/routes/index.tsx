@@ -257,6 +257,8 @@ function Index() {
             setResume("");
             setJob("");
             setSubmitted(false);
+            setGenerated(false);
+
           }}
           className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
