@@ -181,11 +181,12 @@ export async function downloadPdf(built: BuiltResume) {
   built.sections.forEach((section) => {
     ensureSpace(14);
     y += 3;
-    write(section.title, { size: 11.5, style: "bold", gap: 1 });
+    write(section.title, { size: 11.5, style: "bold", gap: 1.2 });
     doc.setDrawColor(150);
     doc.setLineWidth(0.3);
-    doc.line(marginX, y - 1.5, pageWidth - marginX, y - 1.5);
-    y += 1.5;
+    doc.line(marginX, y, pageWidth - marginX, y);
+    y += 4;
+
     section.lines.forEach((line) => {
       const bullet = line.startsWith("• ");
       write(bullet ? line.replace("• ", "\u2022 ") : line, {
