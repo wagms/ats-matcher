@@ -1,18 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
+  AlertTriangle,
   ArrowRight,
   BadgeCheck,
   CheckCircle2,
+  FileDown,
   FileText,
   Lightbulb,
   Target,
   Trash2,
+  Wand2,
   XCircle,
 } from "lucide-react";
 
 import { analyze, SAMPLES, type Keyword } from "@/lib/ats";
+import { buildAdjustedResume, downloadPdf, downloadTxt } from "@/lib/resume-builder";
 import { cn } from "@/lib/utils";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
