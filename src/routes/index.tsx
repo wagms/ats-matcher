@@ -135,10 +135,21 @@ function Index() {
   const [job, setJob] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [filter, setFilter] = useState<"todas" | Keyword["category"]>("todas");
+  const [generated, setGenerated] = useState(false);
 
   const analysis = useMemo(() => analyze(resume, job), [resume, job]);
+  const built = useMemo(
+    () =>
+      buildAdjustedResume(
+        resume,
+        analysis.missing.map((k) => k.term),
+        analysis.found.map((k) => k.term),
+      ),
+    [resume, analysis],
+  );
   const ready = resume.trim().length > 40 && job.trim().length > 40;
   const showResults = submitted && ready;
+
 
   const filtered = (list: Keyword[]) =>
     filter === "todas" ? list : list.filter((k) => k.category === filter);
