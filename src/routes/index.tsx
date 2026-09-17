@@ -402,7 +402,90 @@ function Index() {
               ))}
             </div>
           </div>
+
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+            <h2 className="flex items-center gap-2 font-display text-base font-semibold text-foreground">
+              <Wand2 className="h-4 w-4 text-primary" /> Currículo ATS friendly
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Reorganizamos o seu texto em seções padronizadas que os sistemas de triagem leem sem
+              erro. Depois baixe em .txt ou PDF.
+            </p>
+
+            <div className="mt-5 flex items-start gap-3 rounded-xl border-2 border-warning bg-warning/15 p-4">
+              <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-warning" />
+              <div>
+                <p className="font-display text-sm font-bold uppercase tracking-wide text-foreground">
+                  Nunca invente experiências
+                </p>
+                <p className="mt-1 text-sm font-medium text-foreground">
+                  O currículo gerado usa apenas o conteúdo que você colou — nada é criado
+                  automaticamente. As palavras-chave faltantes aparecem como sugestões: inclua
+                  somente as que você realmente domina e já viveu na prática.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                onClick={() => setGenerated(true)}
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-display text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                <Wand2 className="h-4 w-4" /> Gerar currículo ATS friendly
+              </button>
+              {generated ? (
+                <>
+                  <button
+                    onClick={() => downloadTxt(built)}
+                    className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <FileDown className="h-4 w-4" /> Baixar .txt
+                  </button>
+                  <button
+                    onClick={() => downloadPdf(built)}
+                    className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <FileDown className="h-4 w-4" /> Baixar PDF
+                  </button>
+                </>
+              ) : null}
+            </div>
+
+            {generated ? (
+              <div className="mt-6 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
+                <pre className="max-h-[420px] overflow-auto rounded-xl border border-border bg-background p-5 text-sm leading-relaxed whitespace-pre-wrap text-foreground">
+                  {built.text}
+                </pre>
+                <div className="rounded-xl border border-border p-5">
+                  <p className="font-display text-sm font-semibold text-foreground">
+                    Sugestões para revisar manualmente
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Palavras-chave da vaga que não estão no seu currículo. Adicione apenas o que for
+                    verdade.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {built.suggestions.length ? (
+                      built.suggestions.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full border border-warning/40 bg-warning/10 px-3 py-1 text-xs font-medium capitalize text-foreground"
+                        >
+                          {s}
+                        </span>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground">
+                        Nada faltando — seu currículo já cobre as palavras-chave da vaga.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
         </section>
+
       ) : (
         <div className="h-20" />
       )}
